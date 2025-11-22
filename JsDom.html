@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="div">
+      <h1 id="title" class="header heading">Hello Wrold</h1>
+    </div>
+
+    <ul id="items">
+      <li>
+        <span>This is item 1</span>
+      </li>
+      <li>
+        <span>This is item 2</span>
+      </li>
+      <li>
+        <span>This is item 3</span>
+      </li>
+      <li>
+        <span>This is item 4</span>
+      </li>
+    </ul>
+    <button id="button">Click</button>
+
+    <script>
+      //   let itemCollation = document.getElementsByClassName(`items`);
+      //   Array.from(itemCollation).forEach((item) => console.log(item));
+
+      //   for (let i = 0; i < itemCollation.length; i++) {
+      //     console.log(itemCollation[i]);
+      //   }
+
+      /////////////////QuerySeletor/////////////////////////////querySeletorall က foreachကို တန်းသုံးလို့ရ////////////////
+
+      //   console.log(document.querySelector("ul li:nth-child(2) .items"));
+      //   console.log(document.querySelectorAll(".items"));
+
+      ///////////////////////////Innerhtml-vs-Textcontent////////////////////////////////
+
+      // let title = document.getElementById(`title`);
+      // title.textContent += ` Wold! This is me`;
+
+      // let items = document.getElementById(`items`);
+      // console.log(
+      //   (items.innerHTML += `<li>This is item 5</li>`));
+
+      ////////////////////////////Clone node///////////////////////////////
+
+      // let item = document.getElementById(`items`);
+      // // console.log(item.nodeName);
+      // let clonenode = item.cloneNode(true);
+      // console.log(clonenode);
+
+      ////////////////////////////////////Traverse DOM//////////////////////////////
+
+      // let title = document.getElementById(`div`);
+      // let item = document.getElementById(`items`);
+      // console.log(title.childNodes); /////////////////text node မလိုချင်ရင် Children ကိုခေါ်///////////////
+      // console.log(item.parentNode);
+      // console.log(title.nextElementSibling);
+
+      /////////////////////////////EventListener(for action patten and action element) /////////////////
+
+      // let title = document.getElementById(`title`);
+      // title.addEventListener("click", function (event) {
+      //   console.log(event);
+      //   title.style.color = "Blue";
+      // });
+
+      ////////////////////////////////Create-HTML-ELEMENT/////////////////////////////////
+
+      // let title = document.getElementById(`title`);
+      // // title.className = "h1";
+      // title.classList.add("hello");
+
+      // let ptag = document.createElement("p");
+      // ptag.innerText = "Yangon and Bago";
+      // ptag.className = "para";
+      // ptag.id = "parag";
+      // console.log(ptag);
+
+      ///////////////////////////Add HTML ELEMENT////////////////////////
+
+      // let items = document.getElementById("items");
+      // let button = document.getElementById("button");
+      // button.addEventListener("click", function () {
+      //   let liElement = document.createElement("li");
+      //   liElement.innerText = "Another Item";
+      //   // items.insertBefore(liElement, items.children[2]); ////////////နောက်ဆုံးမာထာချင် Null ကိုသုံး///////////////////
+      //   // items.appendChild(liElement);
+      //   // items.insertAdjacentElement("afterend", liElement);
+      //   items.replaceChild(liElement, items.children[3]);
+      // });
+    </script>
+  </body>
+</html>

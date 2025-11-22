@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <style>
+      body {
+        background: #f4f6fb;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .todo-container {
+        background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+        padding: 2rem 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        width: 100%;
+        max-width: 500px;
+        margin-top: 40px;
+      }
+      .todo-container h2 {
+        margin: 0 0 1.5rem 0;
+        text-align: center;
+        color: #333;
+      }
+      .todo-input-section {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .todo-input-section input[type="text"] {
+        flex: 1;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+      }
+      .todo-input-section button {
+        padding: 0.5rem 1rem;
+        background: #27315c;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.2s;
+      }
+      .todo-input-section button:hover {
+        background: #995af2;
+      }
+      .todo-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border: 1.5px solid gray;
+        border-radius: 8px;
+      }
+      .todo-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid gray;
+      }
+      .todo-item:last-child {
+        border-bottom: none;
+      }
+      .todo-text {
+        flex: 1;
+        font-size: 1rem;
+        color: #222;
+        margin: 0 0.5rem;
+        transition: color 0.2s;
+      }
+      .todo-item.completed .todo-text {
+        text-decoration: wavy underline;
+        color: #ff0000;
+      }
+      .todo-actions {
+        display: flex;
+        gap: 0.25rem;
+      }
+      .todo-actions button {
+        background: none;
+        border: none;
+        color: #4f8cff;
+        font-size: 1rem;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        transition: background 0.2s, color 0.2s;
+      }
+      .todo-actions button:hover {
+        color: #000000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="todo-container">
+      <h2>Todo App</h2>
+      <div class="todo-input-section">
+        <input id="input-text" type="text" placeholder="Add a new todo..." />
+        <button id="add-btn">Add</button>
+      </div>
+      <ul class="todo-list" id="todo-list"></ul>
+    </div>
+    <script>
+      let todos = [];
+      let todoButton = document.getElementById("add-btn");
+      let todoInput = document.getElementById("input-text");
+      let uielement = document.getElementById("todo-list");
+
+      todoButton.addEventListener("click", function () {
+        let todo = {
+          text: todoInput.value,
+          isCompleted: false,
+        };
+        if (todo.text.trim() !== "") {
+          todos.push(todo);
+          todoInput.value = "";
+          renderTodos();
+        }
+        function renderTodos() {
+          uielement.innerHTML = "";
+          for (let i = 0; i < todos.length; i++) {
+            let liElement = document.createElement("li");
+            liElement.className = "todo-item ";
+            if (todos[i].isCompleted) {
+              liElement.classList.add("completed");
+            }
+
+            let spanElement = document.createElement("span");
+            spanElement.className = "todo-text ";
+            spanElement.innerText = todos[i].text;
+
+            let divElement = document.createElement("div");
+            divElement.className = "todo-actions";
+
+            let completeButton = document.createElement("button");
+            completeButton.innerText = todos[i].isCompleted
+              ? "UnComplete"
+              : "Complete";
+            completeButton.addEventListener("click", function () {
+              todos[i].isCompleted = !todos[i].isCompleted;
+              renderTodos();
+            });
+
+            let editButton = document.createElement("button");
+            editButton.innerText = "Edit";
+            editButton.addEventListener("click", function () {
+              let newText = prompt("Edit todo:", todos[i].text);
+              if (newText.trim() !== "") {
+                todos[i].text = newText;
+                renderTodos();
+              }
+            });
+
+            let deleteEButton = document.createElement("button");
+            deleteEButton.innerText = "Delete";
+            deleteEButton.addEventListener("click", function () {
+              todos.splice(i, 1);
+              renderTodos();
+            });
+
+            liElement.appendChild(spanElement);
+            divElement.appendChild(completeButton);
+            divElement.appendChild(editButton);
+            divElement.appendChild(deleteEButton);
+            liElement.appendChild(divElement);
+            uielement.appendChild(liElement);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
